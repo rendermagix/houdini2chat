@@ -1,0 +1,8 @@
+
+# Network Unit Start : {{ props.networkName }}
+
+# Network Nodes
+{{rendered_nodes}}
+# Network Branches
+{% include "branches_unit.py.j2" %}
+# Network Unit End : {{ props.networkName }}

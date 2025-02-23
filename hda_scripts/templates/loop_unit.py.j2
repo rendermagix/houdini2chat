@@ -1,0 +1,39 @@
+# Loop Unit Start : {{ props.loopName }}
+
+{{props.loopName}} = loopStart_Node (
+    beginNodes = [{{ props.beginNodes }}],
+    endNode = "{{ props.endNode }}",
+    iterationMethod = "{{ props.iterationMethod }}",
+    gatherMethod = "{{ props.gatherMethod }}",
+    {%- if props.iterationMethodVal == 2 %}
+    startValue = {{ props.startValue }},
+    incrementValue = {{ props.incrementValue }},
+    iterations = {{ props.iterations }},
+    {% else %}
+    pieceElement = "{{ props.pieceElement }}",
+    {%- if props.pieceAttribute %}
+    pieceAttribute = "{{ props.pieceAttribute }}",
+    {%- endif %}
+    {% endif %}
+    {%- if props.maxIterations -%}
+    maxIterations = {{ props.maxIterations }},
+    {%- endif -%}
+    {%- if props.singlePass is not none %}
+    singlePass = {{ props.singlePass }},
+    {%- endif -%}
+    {%- if props.stopCondition > 0 %}
+    stopCondition = {{ props.stopCondition }},
+    {%- endif -%}
+
+)
+
+# Loop Nodes
+
+{{ rendered_nodes}}
+
+# Loop Branches
+
+{%- include "loop_branches.py.j2" -%}
+
+# Loop Unit End : {{ props.loopName }}
+

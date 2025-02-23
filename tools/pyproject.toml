@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "viz"
+version = "0.1.0"
+description = ""
+authors = ["Michel Habib <michelhabib@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+networkx = "^3.4.2"
+pyvis = "^0.3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

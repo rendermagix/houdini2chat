@@ -1,0 +1,27 @@
+# Ignore Python cache files
+__pycache__/
+hda_scripts/__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore Houdini hip and hda files (if not intended to be committed)
+*.hip
+*.hda
+
+# Ignore generated JSON network files (if applicable)
+*.json
+
+# Ignore log files
+*.log
+
+# VS Code settings
+.vscode/
+
+# Environment and dependency files
+.env
+poetry.lock
+
+# Ignore miscellaneous temporary files
+*.tmp
+
+tools/lib/
