@@ -28,6 +28,7 @@ Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that transfo
 - [Releases](#releases)
 - [Next Steps](#next-steps)
 - [Big Future Ideas](#big-future-ideas)
+- [FAQ](#faq)
 
 
 # Use Cases
@@ -97,3 +98,16 @@ Now you can chat with the generated file(s) using any AI chat or AI code assista
 - Create a Houdini tuned LLM Model.
 - Make a better integration inside SideFX Houdini.
 - Implement innovative ways to update Houdini scenes using Generative AI.
+  
+# FAQ
+<details>
+<summary>Click to Expand Questions/Answers</summary>
+<br>
+
+**Q: How can I make Houdini2Chat HDA visible to all files?**  
+A: (Windows) simply put the hda in documents/houdini20.5/otls<br>Alternatively, add the path to Houdini2Chat HDA in $HOUDINI_PATH<br> **Make sure to restart Houdini!**
+<br>
+
+
+  
+</details>
