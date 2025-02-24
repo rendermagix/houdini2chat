@@ -328,7 +328,7 @@ class NodeGraph:
             nodeName = self.parent_path
             nodeName = hda.HDAManager().sanitize_string(nodeName)
             loop = f"-loop-{self.loop_id}" if self.loop_id is not None else ""
-            jsonFilename = os.path.join(self.hdaSettings.projectLocation, nodeName + "-" + file_type + "-" + loop + ".json")        
+            jsonFilename = os.path.join(self.hdaSettings.getSavePath(self.parent_path), nodeName + "-" + file_type + "-" + loop + ".json")        
 
             data = to_dict()
             with open(jsonFilename, 'w') as f:

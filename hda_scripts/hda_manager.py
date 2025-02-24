@@ -30,9 +30,9 @@ class HDAManager:
         
         # File Settings
         self.projectLocation = hdaNode.evalParm("project_location")
-        self.initFolder()
 
         self.breakByNodePath = hdaNode.evalParm("break_by_node_path")
+        self.autoNodeFolder = hdaNode.evalParm("auto_node_folder")
         self.breakByNetworkBox = hdaNode.evalParm("break_by_network_box")
 
         self.defaultFileFormat = hdaNode.evalParm("default_filename_format")
@@ -47,8 +47,8 @@ class HDAManager:
         # Node List
         self.nodePathsCount = hdaNode.evalParm("nodes_to_extract")
         self.nodePaths = []
+        self.nodeFolderPaths = {}
         self.nodeErrors = []
-        self.getNodePaths()
 
         # Text Settings
         self.header = hdaNode.evalParm("header_text")
@@ -64,6 +64,13 @@ class HDAManager:
         self.exportDebugFiles = hdaNode.evalParm("export_debug_files")
         self.printDebugMessages = hdaNode.evalParm("print_debug_messages")
 
+        # All functions after all attribute Init, for proper use of the attributes (ex. consoleLogDebug)
+        self.getNodePaths()
+        self.initFolders()
+
+    def initOnce(self):
+        self.cleanProjectFolder()
+        
     @staticmethod
     def sanitize_string(text):
         """
@@ -81,11 +88,18 @@ class HDAManager:
             sanitized += '_'
         return sanitized
 
-    def initFolder(self):
-        # Create the project location folder if it does not exist
-        if not os.path.exists(self.projectLocation):
-            os.makedirs(self.projectLocation)
+    def initFolders(self):
+        if self.autoNodeFolder:
+            for nodePath in self.nodePaths:
+                nodeFolder = self.sanitize_string(nodePath)
+                nodeFolderPath = os.path.join(self.projectLocation, nodeFolder)
+                self.nodeFolderPaths[nodePath] = nodeFolderPath
 
+    def getSavePath(self, nodePath):
+        if self.autoNodeFolder:
+            return self.nodeFolderPaths[nodePath]
+        return self.projectLocation
+        
     def getNodePaths(self):
         self.nodePaths = []
         self.nodeErrors = []
@@ -103,17 +117,37 @@ class HDAManager:
             else:
                 self.nodePaths.append(node_path)
 
-    def cleanFolder(self):
-        # check if the project location has .py files
+    def cleanProjectFolder(self):
+        # Create the project location folder if it does not exist
+        if not os.path.exists(self.projectLocation):
+            os.makedirs(self.projectLocation)
+        if not self.autoNodeFolder:
+            fileList = []
+            folderLoc = self.projectLocation
+            for file in os.listdir(folderLoc):
+                if file.endswith(".py"):
+                    fileList.append(file)
+            self.consoleLog(f"======= HDAManager.cleanProjectFolder Found {len(fileList)} .py files in the folder location.", TYPES.INFO)
+            # remove all .py files from the folder location
+            for file in fileList:
+                os.remove(os.path.join(folderLoc, file))
+        
+    def cleanFolder(self, nodePath):
+        if not self.autoNodeFolder:
+            return
+        folderLoc = self.nodeFolderPaths[nodePath]
         fileList = []
-        for file in os.listdir(self.projectLocation):
+        if not os.path.exists(folderLoc):
+            os.makedirs(folderLoc)
+            return
+        # check if the project location has .py files
+        for file in os.listdir(folderLoc):
             if file.endswith(".py"):
                 fileList.append(file)
-        self.consoleLog(f"======= HDAManager.cleanFolder Found {len(fileList)} .py files in the project location.", TYPES.INFO)    
-        # remove all .py files from the project location
-        for file in os.listdir(self.projectLocation):
-            if file.endswith(".py"):
-                os.remove(os.path.join(self.projectLocation, file))
+        self.consoleLog(f"======= HDAManager.cleanFolder Found {len(fileList)} .py files in the folder location.", TYPES.INFO)
+        # remove all .py files from the folder location
+        for file in fileList:
+            os.remove(os.path.join(folderLoc, file))
         
     def setParm(self, parmName, value):
         # TODO: need a better way to use actual variable names and map them to parmnames

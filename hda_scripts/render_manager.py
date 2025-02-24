@@ -113,7 +113,7 @@ class RenderManager:
                 rendered_nodes.append(self.render_node_with_macro(template, node))
         return "\n".join(rendered_nodes)
 
-    def buildFilename(self, metadata):
+    def buildFilename(self, nodePath, metadata):
         # Choose file format string based on render type
         format_str = self.hda_settings.defaultFileFormat
         if metadata["render.type"] == "nodePath":
@@ -140,7 +140,7 @@ class RenderManager:
         # Replace any [token] with its value from metadata or _NONE_ if not found.
         filename = re.sub(r"\[([^\]]+)\]", replace_token, format_str)
         filename = sanitize_string(filename)
-        txtFilename = os.path.join(self.hda_settings.projectLocation, filename)
+        txtFilename = os.path.join(self.hda_settings.getSavePath(nodePath), filename)
     
         txtFilename = RenderManager.ensure_unique_filename(txtFilename)
     
@@ -151,14 +151,14 @@ class RenderManager:
         Saves the rendered text to a file located at the project location defined by
         the HDA parent node.
         """
-        txtFilename = self.buildFilename(metadata)        
+        txtFilename = self.buildFilename(nodeName, metadata)        
         with open(txtFilename, 'w') as f:
             self.hda_settings.consoleLog(f"=========== RenderManager.save_rendered_output Saving Unit {nodeName} to {txtFilename}", hda.TYPES.INFO)
             f.write(rendered_text)
             
-    def save_all_nodes(self, rendered_text, metadata):       
-       txtFilename = os.path.join(self.hda_settings.projectLocation, self.hda_settings.defaultFileFormat)
-       txtFilename = RenderManager.ensure_unique_filename(txtFilename)
-       with open(txtFilename, 'w') as f:
-           self.hda_settings.consoleLog(f"=========== RenderManager.save_all_nodes Saving all nodes to {txtFilename}", hda.TYPES.INFO)
-           f.write(rendered_text)
+    # def save_all_nodes(self, rendered_text, metadata):       
+    #    txtFilename = os.path.join(self.hda_settings.projectLocation, self.hda_settings.defaultFileFormat)
+    #    txtFilename = RenderManager.ensure_unique_filename(txtFilename)
+    #    with open(txtFilename, 'w') as f:
+    #        self.hda_settings.consoleLog(f"=========== RenderManager.save_all_nodes Saving all nodes to {txtFilename}", hda.TYPES.INFO)
+    #        f.write(rendered_text)

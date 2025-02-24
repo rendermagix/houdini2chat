@@ -209,18 +209,17 @@ def extractFromNodes():
     nodeList = hda.nodePaths
     nodesText = []
     if nodeList:
-        hda.cleanFolder() # deleting all files in the project location
         for node_path in nodeList:
             hda.consoleLog(f"===== extractFromNodes.processing: {node_path}", hdam.TYPES.DEBUG)
-            networkTextList = buildNodePathNetwork(node_path)            
+            hda.cleanFolder(node_path) # deleting all files in the Node Folder Location
+            networkTextList = buildNodePathNetwork(node_path)
             nodesText.append("\n".join(networkTextList))
         # if not file per node path, save all nodes in one file
         if not hda.breakByNodePath:
             hda.consoleLog(f"===== extractFromNodes.saving all nodes", hdam.TYPES.DEBUG)
             metadata = getMetadata("", None, "default")
             allNodesText = "\n".join(nodesText)
-            renderNodePathNetworkCombined(node_path, allNodesText, metadata, True)
-            
+            renderNodePathNetworkCombined(node_path, allNodesText, metadata, True)            
     else:
         hda.consoleLogWarning("No valid nodes to extract.")
      
@@ -230,6 +229,7 @@ def main():
     """
     global hda
     hda = hdam.HDAManager() # necessary to refresh settings
+    hda.initOnce()
 
     # keeping if/else instead of match/case, to stay compatible with 3.7 (Houdini 19)
     if hda.actionSelected != 0:
