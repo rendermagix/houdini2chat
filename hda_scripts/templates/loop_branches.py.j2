@@ -1,5 +1,5 @@
 {%- for branch in branches %}
-branch{{ loop.index }} = loop_branch(
+loop_branch_{{ loop.index }} = loop_branch(
     {%- for branch_node in branch %}
         ({{ branch_node.reference if branch_node.reference else branch_node.name }}, "{{ branch_node.type }}")
         {%- if not loop.last -%},{%- endif -%}

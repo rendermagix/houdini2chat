@@ -515,9 +515,35 @@ class NodeGraph:
             if nodePath == self.loop_end: # skip loop end node
                 continue
             gNode = self.get_node(nodePath)
-            nodesRenderData.append(gNode.getRenderData())     
+            dict = gNode.getRenderData()
+            if dict["properties"]:
+                for prop in dict["properties"].values():                    
+                    prop["full_value"] = self.renderParmValue(prop)
+            nodesRenderData.append(dict)     
         self.save_network("nodes", pretty=True)       
         return nodesRenderData
+
+    def renderParmValue(self, parm):        
+        parmComment = ""
+        comments = []
+        val = parm["actual_value"]
+        if parm["expression"]:
+            comments.append("Expression: " + parm["expression"])
+        if parm["reference"]:
+            comments.append("Reference to Node: " + parm["reference"])
+        if parm["unexpanded"]:
+            comments.append("String Formula: " + parm["unexpanded"])
+        if comments:
+            parmComment = ",".join(comments)
+        if parmComment:
+            parmComment =  f"# ({parmComment})"
+        # check parm type, if it is a string, add quotes
+        quotes = False
+        if parm["type"] not in ["parmTemplateType.Float", "parmTemplateType.Int" ]:
+            quotes = True
+        if quotes:
+            val = f"\"{val}\""
+        return f"{val}, {parmComment}"
 
     def getLoopRenderData(self):
         nodePath = self.loop_end
@@ -526,18 +552,20 @@ class NodeGraph:
         loop_data = {
             "loopName": self.name,
             "beginNodes": ", ".join(self.begin_nodes),
-            "endNode": gNode.getName().split('/')[-1].split('@')[0],
-            "iterationMethod": props["itermethod"]["actual_value"],
+            "endNode": "\"" + gNode.getName().split('/')[-1].split('@')[0] + "\"," ,
+            "iterationMethod": self.renderParmValue(props["itermethod"]),
             "iterationMethodVal": props["itermethod"]["value"],
-            "gatherMethod": props["method"]["actual_value"],
-            "startValue": props["startvalue"]["actual_value"],
-            "incrementValue": props["increment"]["actual_value"],
-            "iterations": props["iterations"]["actual_value"],
-            "pieceElement": props["class"]["actual_value"],
-            "pieceAttribute": props["attrib"]["actual_value"] if props["useattrib"]["value"] == 1 else None,
-            "maxIterations": props["maxiter"]["actual_value"] if props["usemaxiter"]["value"] == 1 else None,
-            "singlePass": props["singlepass"]["actual_value"] if props["dosinglepass"]["value"] == 1 else None,
-            "stopCondition": props["stopcondition"]["actual_value"]
+            "gatherMethod": self.renderParmValue(props["method"]),
+            "startValue": self.renderParmValue(props["startvalue"]),
+            "incrementValue": self.renderParmValue(props["increment"]),
+            "iterations": self.renderParmValue(props["iterations"]),
+            "pieceElement": self.renderParmValue(props["class"]),
+            # TODO: the below will not show parm value if it is disabled
+            "pieceAttribute": self.renderParmValue(props["attrib"]) if props["useattrib"]["value"] == 1 else None,
+            "maxIterations": self.renderParmValue(props["maxiter"]) if props["usemaxiter"]["value"] == 1 else None,
+            "singlePass": self.renderParmValue(props["singlepass"]) if props["dosinglepass"]["value"] == 1 else None,
+            "stopCondition": self.renderParmValue(props["stopcondition"]),
+            "stopConditionVal": props["stopcondition"]["actual_value"],
         }
         return loop_data
 

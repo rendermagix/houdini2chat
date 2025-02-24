@@ -1,39 +1,41 @@
-# Loop Unit Start : {{ props.loopName }}
+# Loop Unit Block Begin : {{ props.loopName }}
+# Loop Unit Blocks can be defined anywhere, but will be used according to their appearance in network branches
 
-{{props.loopName}} = loopStart_Node (
+{{props.loopName}} = loopBegin_Node (
     beginNodes = [{{ props.beginNodes }}],
-    endNode = "{{ props.endNode }}",
-    iterationMethod = "{{ props.iterationMethod }}",
-    gatherMethod = "{{ props.gatherMethod }}",
+    endNode = {{ props.endNode }}
+    iterationMethod = {{ props.iterationMethod }}
+    gatherMethod = {{ props.gatherMethod }}
     {%- if props.iterationMethodVal == 2 %}
-    startValue = {{ props.startValue }},
-    incrementValue = {{ props.incrementValue }},
-    iterations = {{ props.iterations }},
+    startValue = {{ props.startValue }}
+    incrementValue = {{ props.incrementValue }}
+    iterations = {{ props.iterations }}
     {% else %}
-    pieceElement = "{{ props.pieceElement }}",
+    pieceElement = {{ props.pieceElement }}
     {%- if props.pieceAttribute %}
-    pieceAttribute = "{{ props.pieceAttribute }}",
+    pieceAttribute = {{ props.pieceAttribute }}
     {%- endif %}
     {% endif %}
     {%- if props.maxIterations -%}
-    maxIterations = {{ props.maxIterations }},
+    maxIterations = {{ props.maxIterations }}
     {%- endif -%}
     {%- if props.singlePass is not none %}
-    singlePass = {{ props.singlePass }},
+    singlePass = {{ props.singlePass }}
     {%- endif -%}
-    {%- if props.stopCondition > 0 %}
-    stopCondition = {{ props.stopCondition }},
+    {%- if props.stopConditionVal > 0 %}
+    stopCondition = {{ props.stopCondition }}
     {%- endif -%}
 
 )
 
 # Loop Nodes
-
 {{ rendered_nodes}}
 
-# Loop Branches
+# Loop Branches Begin: {{ props.loopName }}
+# This is How the Loop Nodes are connected and ordered
 
-{%- include "loop_branches.py.j2" -%}
+{%- include "loop_branches.py.j2" %}
+# Loop Branches End: {{ props.loopName }}
 
-# Loop Unit End : {{ props.loopName }}
+# Loop Unit Block End : {{ props.loopName }}
 

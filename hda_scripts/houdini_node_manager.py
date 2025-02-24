@@ -87,24 +87,27 @@ class HoudiniNodeManager:
         actual_value = value
         unexpanded = None
         reference = None
-        add_quotes = False
-        if parm_type == hou.parmTemplateType.Ramp:
-            add_quotes = True                        
+        expression = None                      
         if parm_type == hou.parmTemplateType.Menu:
-            add_quotes = True                        
             menu_labels = parm.menuLabels()
             actual_value = menu_labels[value]
-        if parm_type == hou.parmTemplateType.String:
-            add_quotes = True
-            unexp = parm.unexpandedString()
-            if unexp != actual_value:
-                unexpanded = unexp
         # Check if the parameter is a reference expression.
         ref_expr = parm.getReferencedParm()
         if ref_expr != parm:
             reference = ref_expr.path()
-                
-        return value, actual_value, unexpanded, reference, add_quotes
+        try:
+            unexp = parm.unexpandedString()
+            if unexp != actual_value:
+                unexpanded = unexp
+        except hou.OperationFailed:
+            unexpanded = None
+        try:
+            expr = parm.expression()
+            if expr:
+                expression = expr
+        except hou.OperationFailed:
+            expression = None                
+        return value, actual_value, unexpanded, reference, expression
     
     @staticmethod
     def extract_node_properties(node_path):
@@ -128,7 +131,6 @@ class HoudiniNodeManager:
             actual_value = ""
             reference = None  
             unexpanded = None      
-            add_quotes = False    
             changed = not parm.isAtDefault()
             userCreated = parm.isSpare()
             # TO BE DELETED
@@ -146,7 +148,7 @@ class HoudiniNodeManager:
                 label = parmTuple.description()
                 value = parmTuple.eval()
                 actual_value = value
-                pValue, pActual_value, pUnexpanded, pReference, pAdd_quotes = HoudiniNodeManager.get_parm_value(parm)
+                pValue, pActual_value, pUnexpanded, pReference, expression = HoudiniNodeManager.get_parm_value(parm)
                 # need to check if properties[key] exists, 
                 # if yes, then get these values: unexpanded, reference, and update them
                 prop = properties.get(key)
@@ -163,7 +165,7 @@ class HoudiniNodeManager:
                 key = parm.name()
                 label = parm.description()
                 # for Menu parameters, get the actual value from the menu labels
-                value, actual_value, unexpanded, reference, add_quotes = HoudiniNodeManager.get_parm_value(parm)
+                value, actual_value, unexpanded, reference, expression = HoudiniNodeManager.get_parm_value(parm)
                 
             label = hda.HDAManager().sanitize_string(label).lower()
             
@@ -176,7 +178,7 @@ class HoudiniNodeManager:
                 "user_created": userCreated,
                 "reference": reference,
                 "unexpanded": unexpanded,
-                "add_quotes": add_quotes,
+                "expression": expression,
                 # TO BE DELETED
                 "isTuple": hasParmTuple,
                 "component_index": cIndex,

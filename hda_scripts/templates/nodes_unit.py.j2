@@ -1,4 +1,4 @@
-{% macro default(node) -%}
+{%- macro default(node) -%}
 {%- if node.note -%}
 """
 Sticky Note:
@@ -17,39 +17,25 @@ Sticky Note:
     node_inputs = "{{ node.inputs }}",
 {%- endif -%} 
 {%- for key, prop in node.properties.items() if prop.changed or prop.user_created %}
-    {{ prop.label }} = 
-        {%- if prop.add_quotes -%} " {%- endif -%}
-        {{ prop.actual_value }}
-        {%- if prop.add_quotes -%} " {%- endif -%}
-    {% if prop.unexpanded or prop.reference %} # {% endif %}
-    {%- if prop.unexpanded -%}expr:[{{ prop.unexpanded }}]{% endif %}
-    {%- if prop.reference -%}ref:[{{ prop.reference }}]{% endif %}    
-    {%- if not loop.last %},{%- endif -%}
-{% endfor %}
-){{ "\n" }}
+    {{ prop.label }} = {{ prop.full_value}}
+{%- endfor %}
+)
 {%- endmacro %}
 
-{%- macro attribwrangle(node) -%}
+{% macro attribwrangle(node) %}
 def {{ node.name }}_Wrangle_Node():
 {%- if node.inputs is not none %}
     node_inputs = "{{ node.inputs }}",
 {%- endif -%} 
 {%- for key, prop in node.properties.items() if prop.changed or prop.user_created %}
     {%- if key != 'snippet' and key != 'class' %}
-    {{ prop.label }} = 
-        {%- if prop.add_quotes -%} " {%- endif -%}
-        {{ prop.actual_value }}
-        {%- if prop.add_quotes -%} " {%- endif -%}
-    {%- if prop.unexpanded or prop.reference %} # {% endif %}
-    {%- if prop.unexpanded -%}expr:[{{ prop.unexpanded }}]{% endif %}
-    {%- if prop.reference -%}ref:[{{ prop.reference }}]{% endif %}  
+    {{ prop.label }} = {{ prop.full_value}}
     {%- endif %}    
 {%- endfor %}
     # Key parameters (Run Over)
-    run_over = "{{ node.properties['class'].actual_value }}"
+    run_over = {{ node.properties['class'].full_value }}
     # VEX code block: (VEXpression)
     {{ '"""//cpp' }}
     {{ node.properties['snippet'].actual_value | replace("\r\n", "\n") | indent(4) }}
-    """{{ "\n" }}
-
-{%- endmacro -%}
+    """
+{% endmacro %}
