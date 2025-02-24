@@ -233,10 +233,10 @@ def main():
 
     # keeping if/else instead of match/case, to stay compatible with 3.7 (Houdini 19)
     if hda.actionSelected != 0:
-        extraction_time = datetime.datetime.now().isoformat()
-        hda.consoleLogInfo("=== main Start @ "  + extraction_time)
+        startTime = datetime.datetime.now()
+        hda.consoleLogInfo("=== Houdini2Chat -> Starting @ "  + startTime.strftime("%I:%M:%S %p"))
     if hda.actionSelected == 1:
-        hda.consoleLogInfo("=== main.Export Selected")
+        hda.consoleLogInfo("=== Houdini2Chat.Export")
         extractFromNodes()
         hda.setParm("action_selected", 0)
     elif hda.actionSelected == 2:
@@ -249,6 +249,7 @@ def main():
         xf.ExtractFunctions().extract_all_node_types()
         hda.setParm("action_selected", 0)
     if hda.actionSelected != 0:
-        extraction_time = datetime.datetime.now().isoformat()
-        hda.consoleLogInfo("=== main End @ "  + extraction_time)
+        endTime = datetime.datetime.now()
+        hda.consoleLogInfo("=== Houdini2Chat Ending @ " + endTime.strftime("%I:%M:%S %p") +
+                     " | Duration: " + str((endTime - startTime).total_seconds() * 1000) + "ms")
     return

@@ -24,7 +24,7 @@ sys.modules["extract_functions"] = extract_functions
 main = toolutils.createModuleFromSection("main", kwargs["type"], "main")
 sys.modules["main"] = extract_functions
 
-def handleActionNew(action_value):
+def handleAction(action_value):
     hda_node = hou.pwd()
     hda_node.parm("action_selected").set(action_value)    
     main.main()

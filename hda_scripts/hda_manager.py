@@ -89,6 +89,12 @@ class HDAManager:
     def getNodePaths(self):
         self.nodePaths = []
         self.nodeErrors = []
+        # if no multiparm, then just get the parent path
+        if self.nodePathsCount == 0:
+            parent = self.hdaNode.parent()
+            self.nodePaths.append(parent.path())
+            return
+        # if multiparm, then get the paths from the multiparm
         for i in range(1, self.nodePathsCount + 1): # start from 1, coz multiparm is 1 based
             node_path = self.hdaNode.evalParm("node_path_" + str(i))
             if not node_path.startswith("/obj/"):
