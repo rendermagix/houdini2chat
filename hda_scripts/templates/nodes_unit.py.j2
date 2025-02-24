@@ -25,7 +25,7 @@ Sticky Note:
 {% macro attribwrangle(node) %}
 def {{ node.name }}_Wrangle_Node():
 {%- if node.inputs is not none %}
-    node_inputs = "{{ node.inputs }}",
+    node_inputs = "{{ node.inputs }}", # Note, some Node Inputs may be defined elsewhere
 {%- endif -%} 
 {%- for key, prop in node.properties.items() if prop.changed or prop.user_created %}
     {%- if key != 'snippet' and key != 'class' %}

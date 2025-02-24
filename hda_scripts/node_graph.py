@@ -154,7 +154,6 @@ class NodeGraph:
         traversed = []
         miNode = None
         current_path = start_node_path
-        # print("traversing from:", current_path)
         while current_path in self.gNodes:
             current_node = self.gNodes[current_path]
             traversed.append(current_node.getPath())
@@ -162,7 +161,7 @@ class NodeGraph:
             if len(current_node.getInputs()) > 1:
                 # but if its a re-entry root node, then continue
                 if len(traversed) > 1:
-                    self.hdaSettings.consoleLogDebug(f"NodeGraph.traverse_direct_from_edges: Multiple Inputs {current_node.getPath()}")
+                    # self.hdaSettings.consoleLogDebug(f"NodeGraph.traverse_direct_from_edges: Multiple Inputs {current_node.getPath()}")
                     miNode = current_node.getPath()
                     break
             # Get all edges starting from the current node
@@ -264,17 +263,18 @@ class NodeGraph:
             branch, miNode = self.traverse_direct_from_edges(node_path)
             if miNode and miNode not in root_nodes:
                 root_nodes.append(miNode)
-                self.hdaSettings.consoleLogDebug(f"NodeGraph.break_graph_in_branches: minode added {miNode}")
+                # self.hdaSettings.consoleLogDebug(f"NodeGraph.break_graph_in_branches: minode added {miNode}")
             # if the branch has more than one node, add it to the list of branches
             if len(branch) > 1:
                 self.branches.append(branch)
             if len(self.branches) > 1000: # TODO do better cyclic graph detection
                 self.hdaSettings.consoleLogWarning(f"***** NodeGraph.break_graph_in_branches: Possible Cyclic Graph, 1000 branches?")
                 break
+        self.hdaSettings.consoleLogDebug(f"NodeGraph.break_graph_in_branches: ROOT NODES {root_nodes} in {self.name}")
         return self.branches
 
     def compose(self, nodeList):
-        self.hdaSettings.consoleLogDebug(f"NodeGraph.compose: {self.parent_path}")
+        self.hdaSettings.consoleLogDebug(f"=========== NodeGraph.compose: {self.parent_path}")
         self.build_graph_from_node_list(nodeList)
         nodePath = self.parent_path
         self.findGraphLoops()
@@ -282,7 +282,7 @@ class NodeGraph:
         # Build graph for each group
         graphList = []
         for i, graphLoop in enumerate(self.graphLoops):
-            self.hdaSettings.consoleLogDebug(f"NodeGraph.compose loop: {self.parent_path} {i}")
+            # self.hdaSettings.consoleLogDebug(f"NodeGraph.compose loop: {self.parent_path} {i}")
             g = NodeGraph(nodePath, nodePath)
             g.buildLoopGraphFromNodes(self, graphLoop, i)
             g.break_nodes_with_multiple_outputs()
@@ -292,7 +292,7 @@ class NodeGraph:
             graphList.append(g)
 
         # Build Graph for No Loops Network
-        self.hdaSettings.consoleLogDebug(f"NodeGraph.compose NoLoopNet: {self.parent_path}")
+        # self.hdaSettings.consoleLogDebug(f"NodeGraph.compose NoLoopNet: {self.parent_path}")
         g = NodeGraph(nodePath, nodePath)
         g.buildGraphFromNodes(self, self.noLoopNodes, self.begin_end_nodes)
         g.break_nodes_with_multiple_outputs()
@@ -442,9 +442,9 @@ class NodeGraph:
                 nameListBegin.append(gNode.getName())
             # loop on node inputs only, if input is coming from outside the node list then ignore it
             for inp in gNode.getInputs():
-                if inp in nodes:
-                    self.add_edge(inp, gNode.getPath())
-                    # self.edges.append((inp, gNode.getPath()))
+                self.add_edge(inp, gNode.getPath()) # will add edges even if from outside loop, for clarity
+            # for outp in gNode.getOutputs():                
+            #     self.add_edge(gNode.getPath(), outp)                
         ### pick a loop name from being/end node names, or set it to Loop_i
         graphName = ""
         for node in nameListEnd:
@@ -541,10 +541,11 @@ class NodeGraph:
         if parmComment:
             parmComment =  f"# ({parmComment})"
         # check parm type, if it is a string, add quotes
-        quotes = False
-        if parm["type"] not in ["parmTemplateType.Float", "parmTemplateType.Int" ]:
-            quotes = True
+        quotes = True
+        if str(parm["type"]) in ["parmTemplateType.Int", "parmTemplateType.Float", "parmTemplateType.Toggle"]:
+            quotes = False
         if quotes:
+            # print(f"quotes: {quotes}, name: {parm['label']}, type: {parm['type']}")
             val = f"\"{val}\""
         return f"{val}, {parmComment}"
 
