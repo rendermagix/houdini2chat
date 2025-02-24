@@ -1,8 +1,18 @@
 
-# Network Unit Start : {{ props.networkName }}
+# Network Unit Begin : {{ props.networkName }}
+# Network Unit is a self-contained graph of Nodes, branches and may depend on Loop Unit Blocks defined earlier.
 
-# Network Nodes
+# Network Nodes Defintions (Begin): {{ props.networkName }}
+# Node Definitions may not be in the same order they are executed. Network Branches will define the order of execution.
 {{rendered_nodes}}
-# Network Branches
+# Network Nodes Defintions (End): {{ props.networkName }}
+
+# Network Branches (Begin): {{ props.networkName }}
+# This section defines the connections between the nodes and help understand the network flow.
+# Network Branches may refer to Loop Unit Blocks defined earlier.
+
 {% include "branches_unit.py.j2" %}
+
+# Network Branches (End): {{ props.networkName }}
+
 # Network Unit End : {{ props.networkName }}

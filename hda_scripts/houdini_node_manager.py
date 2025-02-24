@@ -148,6 +148,7 @@ class HoudiniNodeManager:
                 label = parmTuple.description()
                 value = parmTuple.eval()
                 actual_value = value
+                changed = not parmTuple.isAtDefault()
                 pValue, pActual_value, pUnexpanded, pReference, expression = HoudiniNodeManager.get_parm_value(parm)
                 # need to check if properties[key] exists, 
                 # if yes, then get these values: unexpanded, reference, and update them
@@ -179,7 +180,7 @@ class HoudiniNodeManager:
                 "reference": reference,
                 "unexpanded": unexpanded,
                 "expression": expression,
-                # TO BE DELETED
+                # TO BE DELETED - Debug Only
                 "isTuple": hasParmTuple,
                 "component_index": cIndex,
                 "is_multi_parm_instance": isMultiPI,

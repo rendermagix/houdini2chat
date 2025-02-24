@@ -19,7 +19,7 @@ def renderNetworkUnit(graph):
         "networkName": graph.name
     }
     branchRenderData = graph.getBranchRenderData()
-    nodeRenderData = graph.getNodesRenderData()        
+    nodeRenderData = graph.getNodesRenderData(isLoop=False)        
     renderMan = rm.RenderManager() 
     rendered_nodes_text = renderMan.render_nodes(nodeRenderData)
     # Load the network unit template.
@@ -30,7 +30,7 @@ def renderNetworkUnit(graph):
 
 def renderLoopUnit(graph):
     # get node data
-    nodesRenderData = graph.getNodesRenderData() # get all nodes data
+    nodesRenderData = graph.getNodesRenderData(isLoop=True) # get all nodes data
     loopRenderData = graph.getLoopRenderData() # get loop data    
     branchRenderData = graph.getBranchRenderData()
                     

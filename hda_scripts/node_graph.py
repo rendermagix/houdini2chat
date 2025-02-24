@@ -477,11 +477,8 @@ class NodeGraph:
         Build a graph from a list of nodes.
         """
         self.name = graph.name
-        # flatten graphloops to get all loop nodes in one list
-        # flatLoopNodes = [node for loop in graph.graphLoops for node in loop]
-        # hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {len(flatLoopNodes)}")
-        hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {nodes}")    
-        hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {begin_end_nodes}")    
+        # hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {nodes}")    
+        # hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {begin_end_nodes}")    
         all_nodes = nodes + begin_end_nodes
         hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {len(all_nodes)}")
         for nodeName in all_nodes:
@@ -505,16 +502,22 @@ class NodeGraph:
 # ========= RENDERING Graph 
 # =========================
 
-    def getNodesRenderData(self):
+    def getNodesRenderData(self,isLoop):
         # loop on all nodes and get their render data
         nodesRenderData = []
         for nodePath in self.gNodes:
             # TODO: check this logic: if we have multiple nodes with reference, keep only the original one
             if "@" in nodePath:
                 continue
+            # this condition happens in case of loop graph only
             if nodePath == self.loop_end: # skip loop end node
                 continue
             gNode = self.get_node(nodePath)
+            if "houdini_2_chat" in gNode.getType():
+                if not self.hdaSettings.exportThisNode:
+                    continue
+            if not isLoop and gNode.getType() in ["block_begin", "block_end"]:
+                continue
             dict = gNode.getRenderData()
             if dict["properties"]:
                 for prop in dict["properties"].values():                    
@@ -529,7 +532,7 @@ class NodeGraph:
         val = parm["actual_value"]
         if parm["expression"]:
             comments.append("Expression: " + parm["expression"])
-        if parm["reference"]:
+        if parm["reference"]: # TODO: check if reference is same as expression            
             comments.append("Reference to Node: " + parm["reference"])
         if parm["unexpanded"]:
             comments.append("String Formula: " + parm["unexpanded"])
