@@ -149,7 +149,7 @@ class HoudiniNodeManager:
                 value = parmTuple.eval()
                 actual_value = value
                 changed = not parmTuple.isAtDefault()
-                pValue, pActual_value, pUnexpanded, pReference, expression = HoudiniNodeManager.get_parm_value(parm)
+                pValue, pActual_value, pUnexpanded, pReference, pExpression = HoudiniNodeManager.get_parm_value(parm)
                 # need to check if properties[key] exists, 
                 # if yes, then get these values: unexpanded, reference, and update them
                 prop = properties.get(key)
@@ -161,6 +161,10 @@ class HoudiniNodeManager:
                     reference = f"{prop['reference']}, {pReference}" if pReference else prop["reference"]
                 else:
                     reference = pReference                    
+                if prop and prop["expression"]:                    
+                    expression = f"{prop['expression']}, {pExpression}" if pExpression else prop["expression"]
+                else:
+                    expression = pExpression                    
             else:
                 # use parm name
                 key = parm.name()
@@ -169,7 +173,9 @@ class HoudiniNodeManager:
                 value, actual_value, unexpanded, reference, expression = HoudiniNodeManager.get_parm_value(parm)
                 
             label = hda.HDAManager().sanitize_string(label).lower()
-            
+            # a parameter is changed if a value is not default, or has a reference or expression or stringExpr
+            if reference or unexpanded or expression:
+                changed = True
             # set the properties
             properties[key] = {
                 "label": label,

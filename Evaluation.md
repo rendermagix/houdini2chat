@@ -11,8 +11,8 @@ We looked at some of the most popular Houdini Tutors and Professionals to find s
 |----------|----------|------------|-----------|----------|
 | Fibonacci Flower <br> [Video](https://www.youtube.com/watch?v=nPWQpQQgWJM) - [Hip File](https://github.com/jhorikawa/HoudiniHowtos/tree/master/Live-0090%20Fibonacci%20Flower) | Junichiro Horikawa |  TBD | GPT4o/ChatGPT Canvas| TBD
 | Interference Patterns on Surfaces <br> [Video](https://www.youtube.com/watch?v=IliafCzn82I) - [Hip File](https://entagma.com/interference-patterns-on-surfaces/) | Entagma |  TBD | GPT4o/ChatGPT Canvas| TBD
-
-
+| xyzdist Demo (notes removed) <br> [Hip File](https://tokeru.com/cgwiki/HoudiniVex3.html) | CGWiki |  TBD | Claude 3.7 Sonnet| [Chat Link](https://claude.ai/share/a6c540ea-4bd7-4a9c-ac27-e62694c86fb1)
+| xyzdist Demo (with Notes) <br> [Hip File](https://tokeru.com/cgwiki/HoudiniVex3.html) | CGWiki |  TBD | Claude 3.7 Sonnet| [Chat Link](https://claude.ai/share/609877e3-c941-4e7c-97dd-4b984922ce61)
 
 
 # Third Party Evaluation
