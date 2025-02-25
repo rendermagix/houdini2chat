@@ -101,6 +101,9 @@ class GNode:
             "props": self._props
         }
 
+    def getNote(self):
+        return self._note
+    
     def inputsToString(self):
         # if graph node has more than one input, add an inputs property with node names
         inputs = [inp for inp in self.getInputs() if inp and isinstance(inp, str)]

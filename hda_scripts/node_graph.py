@@ -104,28 +104,36 @@ class NodeGraph:
         # if note is above the node, ignore it        
         # hdaSettings.consoleLog(f"note_bottom: {note_bottom}", type=hda.TYPES.DEBUG)
         if pos_node[1] < note["position"][1]:
-            hdaSettings.consoleLog(f"note is above the node", type=hda.TYPES.DEBUG)
+            # hdaSettings.consoleLog(f"note is above the node", type=hda.TYPES.DEBUG)
             return None        
         # if node is further from distance threshold, return
         if distance > hdaSettings.stickyNotesDistanceThreshold:
-            hdaSettings.consoleLog(f"distance is greater than threshold", type=hda.TYPES.DEBUG)
+            # hdaSettings.consoleLog(f"distance is greater than threshold", type=hda.TYPES.DEBUG)
             return None
         return distance
 
     def assign_sticky_notes(self, sticky_notes):
+        note_text = ""
         # loop on sticky notes
         for note in sticky_notes:
             # find distance to each node
             for node in self.gNodes.values():
+                if '@' in node.getName():
+                    continue
                 distance = self.get_distance(node, note)
                 if distance is not None:
                     if note["distance"] is None or distance < note["distance"]:
                         note["distance"] = distance
                         note["closest_node"] = node.getPath()
+            note_text = note['text'][:10] + "..." if len(note['text']) > 10 else note['text']
             # assign closest node to each note
             if note["closest_node"] is not None:
                 updateGNode = self.gNodes.get(note["closest_node"])
-                updateGNode.update(note=note["text"])                
+                updateGNode.update(note=note["text"])
+                # log node path and note text
+                # self.hdaSettings.consoleLogDebug(f"NodeGraph.assign_sticky_notes: {note_text} to {self.gNodes[note['closest_node']].getName()}")
+
+            # self.hdaSettings.consoleLog(f"note: {note_text}, closest node: {note['closest_node']}, distance: {note['distance']}", type=hda.TYPES.DEBUG)
 
     def get_root_nodes(self, return_names=False):
         """
@@ -270,7 +278,7 @@ class NodeGraph:
             if len(self.branches) > 1000: # TODO do better cyclic graph detection
                 self.hdaSettings.consoleLogWarning(f"***** NodeGraph.break_graph_in_branches: Possible Cyclic Graph, 1000 branches?")
                 break
-        self.hdaSettings.consoleLogDebug(f"NodeGraph.break_graph_in_branches: ROOT NODES {root_nodes} in {self.name}")
+        # self.hdaSettings.consoleLogDebug(f"NodeGraph.break_graph_in_branches: ROOT NODES {root_nodes} in {self.name}")
         return self.branches
 
     def compose(self, nodeList):
@@ -302,11 +310,12 @@ class NodeGraph:
         graphList.append(g)
 
         # Extract Sticky Notes
-        noteList = hnm.HoudiniNodeManager.extract_sticky_notes(self.parent_path)
-        # loop on graphs and assign notes to nodes
-        for g in graphList:
-            noteListCopy = noteList.copy()
-            g.assign_sticky_notes(noteListCopy)
+        if self.hdaSettings.includeStickyNotes:
+            noteList = hnm.HoudiniNodeManager.extract_sticky_notes(self.parent_path)
+            # loop on graphs and assign notes to nodes
+            for g in graphList:
+                noteListCopy = noteList.copy()
+                g.assign_sticky_notes(noteListCopy)
         self.graphList = graphList
         return graphList
 
@@ -477,10 +486,10 @@ class NodeGraph:
         Build a graph from a list of nodes.
         """
         self.name = graph.name
-        # hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {nodes}")    
-        # hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {begin_end_nodes}")    
+        # hda.HDAManager().consoleLogDebug(f"============= NodeGraph.buildGraphFromNodes: {self.name} {nodes}")    
+        # hda.HDAManager().consoleLogDebug(f"============= NodeGraph.buildGraphFromNodes: {self.name} {begin_end_nodes}")    
         all_nodes = nodes + begin_end_nodes
-        hda.HDAManager().consoleLogDebug(f"NodeGraph.buildGraphFromNodes: {self.name} {len(all_nodes)}")
+        hda.HDAManager().consoleLogDebug(f"============= NodeGraph.buildGraphFromNodes: {self.name} {len(all_nodes)}")
         for nodeName in all_nodes:
             # get copy of node from original graph
             gNode = graph.get_node(nodeName).copy()

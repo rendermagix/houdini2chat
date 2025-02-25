@@ -23,6 +23,12 @@ Sticky Note:
 {%- endmacro %}
 
 {% macro attribwrangle(node) %}
+{%- if node.note -%}
+"""
+Sticky Note:
+{{ node.note }}
+"""
+{% endif %}
 def {{ node.name }}_Wrangle_Node():
 {%- if node.inputs is not none %}
     node_inputs = "{{ node.inputs }}", # Note, some Node Inputs may be defined elsewhere

@@ -42,7 +42,7 @@ class HDAManager:
         # General Filters
         self.filterNetworkBoxes = hdaNode.evalParm("filter_network_boxes")
         self.networkBoxFilter = hdaNode.evalParm("network_box_filter")        
-        self.ignoreStickyNotes = hdaNode.evalParm("ignore_notes")
+        self.includeStickyNotes = hdaNode.evalParm("include_notes")
         
         # Node List
         self.nodePathsCount = hdaNode.evalParm("nodes_to_extract")
