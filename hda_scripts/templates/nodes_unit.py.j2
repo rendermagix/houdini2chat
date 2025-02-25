@@ -43,5 +43,27 @@ def {{ node.name }}_Wrangle_Node():
     # VEX code block: (VEXpression)
     {{ '"""//cpp' }}
     {{ node.properties['snippet'].actual_value | replace("\r\n", "\n") | indent(4) }}
+    {{'"""'}}
+{% endmacro %}
+
+{% macro solver(node) %}
+{%- if node.note -%}
+"""
+Sticky Note:
+{{ node.note }}
+"""
+{% endif %}
+def {{ node.name }}_Solver_Node():
+{%- if node.inputs is not none %}
+    node_inputs = "{{ node.inputs }}", # Note, some Node Inputs may be defined elsewhere
+{%- endif -%} 
+{%- for key, prop in node.properties.items() if prop.changed or prop.user_created %}
+    {%- if key != 'snippet' and key != 'class' %}
+    {{ prop.label }} = {{ prop.full_value}}
+    {%- endif %}    
+{%- endfor %}
+    # VEX code block: (VEXpression)
+    {{ '"""//cpp' }}
+    {{ node.properties['snippet'].actual_value | replace("\r\n", "\n") | indent(4) }}
     """
 {% endmacro %}
