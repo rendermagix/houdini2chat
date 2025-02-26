@@ -1,27 +1,24 @@
 # MISSION
 
-Empowering SideFX Houdini Artists with the fast growing AI technologies to create better and faster Houdini projects.
+Empowering SideFX Houdini Artists with fast growing AI technologies to create better and faster Houdini projects.
 
 # HOUDINI 2 CHAT
 
 Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that transforms all or parts of a Houdini scene into a format that is efficient for use with AI chat and AI Code assistants.
 
-## Current Status
-- The project is in the early stages of development (Proof of concept).
+**Current Status**
+
+- The project is in **`early development stage (Proof of concept)`**.
 - It is experimental and missing many features.
 
-
 # Table of Contents
-
+<!-- TOC depthFrom:1 depthTo:2 -->
 - [MISSION](#mission)
 - [HOUDINI 2 CHAT](#houdini-2-chat)
-  - [Current Status](#current-status)
 - [Table of Contents](#table-of-contents)
 - [Use Cases](#use-cases)
   - [How it works](#how-it-works)
   - [Compatible AI Tools](#compatible-ai-tools)
-    - [Tested with](#tested-with)
-    - [Should also work with (Not Tested)](#should-also-work-with-not-tested)
 - [Compatible Houdini Versions](#compatible-houdini-versions)
 - [Features List](#features-list)
   - [In the development pipeline](#in-the-development-pipeline)
@@ -30,7 +27,7 @@ Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that transfo
 - [Big Future Ideas](#big-future-ideas)
 - [FAQ](#faq)
 
-
+<!-- /TOC -->
 # Use Cases
 
 - Explain complex Houdini scenes
