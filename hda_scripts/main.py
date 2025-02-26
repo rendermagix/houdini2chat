@@ -133,9 +133,8 @@ def BuildNodePathNetworkWithBoxes(nodePath, rootNetworkBoxes):
     nodeNetworks = [] # A list of Rendered Networks
     # for each network box
     for netbox in rootNetworkBoxes:
-        # set name and filename
-        gName = netbox.comment()
-        gFileName = netbox.name() + "_" + netbox.comment()
+        # set name and filename        
+        gName = netbox.name() + "_" + netbox.comment()
         # get network box children
         nodeList = hnm.HoudiniNodeManager.get_network_box_children(netbox)
         # Filter by Network Boxes
@@ -145,8 +144,8 @@ def BuildNodePathNetworkWithBoxes(nodePath, rootNetworkBoxes):
         if not len(nodeList):
             hda.consoleLogDebug(f"======= BuildNodePathNetworkWithBoxes.NetBoxLoop - ZERO nodes in: {gFileName}")
             continue
-        hda.consoleLogDebug(f"======= BuildNodePathNetworkWithBoxes.NetBoxLoop processing {gFileName}")
-        graph = ng.NodeGraph(nodePath, nodePath, nodeList)
+        hda.consoleLogDebug(f"======= BuildNodePathNetworkWithBoxes.NetBoxLoop processing {gName}")
+        graph = ng.NodeGraph(gName, nodePath, nodeList)
         graphList = graph.graphList
         metadata = getMetadata(nodePath, netbox, "networkBox")
         saveToFile = hda.breakByNetworkBox # Create a file per network box

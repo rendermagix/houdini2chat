@@ -90,7 +90,10 @@ class HoudiniNodeManager:
         expression = None                      
         if parm_type == hou.parmTemplateType.Menu:
             menu_labels = parm.menuLabels()
-            actual_value = menu_labels[value]
+            if 0 <= value < len(menu_labels):
+                actual_value = menu_labels[value]
+            else:
+                hda.HDAManager().consoleLogWarning(f"========= HoudiniNodeManager.get_parm_value: {parm.path()} has an invalid menu value: {value}")
         # Check if the parameter is a reference expression.
         ref_expr = parm.getReferencedParm()
         if ref_expr != parm:
