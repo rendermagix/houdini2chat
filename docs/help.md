@@ -106,11 +106,18 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 
 ## Evaluation
 
-1. **xyzdist Demo**
+### 1. xyzdist Demo
 
 <table>
   <tr>
-    <td><img src="images/xyzdist.gif" alt="img" width="300"/></td>
-    <td><img src="images/xyzdist_net.JPG" alt="network" width="300"/></td>
+    <td><img src="images/xyzdist.gif" alt="img" width="400"/></td>
+    <td><img src="images/xyzdist_net.JPG" alt="network" width="400"/></td>
   </tr>
 </table>
+
+This is the simplest demo that demonstrates a point orbiting around a 3d Surface.
+> xyzdist finds the distance, primnum, uv of the closest prim, a point is made at that location, its colour is set from the closest prim, a red line is drawn from the orbiting point to the new point, and finally a wireframe sphere is generated on the new point, its colour also matches the prim its currently on, and its radius is set from the distance returned from xyzdist, so it alwasy just touches the orbiting point.
+
+Extract from Claude Analysis:
+
+![Claude](images/1_res1.JPG)
