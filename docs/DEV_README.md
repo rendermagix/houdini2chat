@@ -9,6 +9,7 @@ These are tools I used in building this project and are not necessarily needed t
     - Better Jinja - [Link](https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml)
     - Extended Embedded Languages [Link](https://marketplace.visualstudio.com/items?itemName=ruschaaf.extended-embedded-languages) - To highlight Vex code within Python code in Extracted Files
     - Markdown All In One - [Link](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+    - Emojisense - [Link](https://marketplace.visualstudio.com/items?itemName=bierner.emojisense)
 
 
 # Important Links

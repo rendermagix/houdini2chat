@@ -136,19 +136,13 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 
 ### 1. [xyzdist Demo](https://tokeru.com/cgwiki/HoudiniVex3.html#vex-section-3) on CGWiki
 
- **Description**: Visualizing a point orbiting around a 3d Surface
-\
-**Level** Easy
-\
- **Elements** 26 Nodes, 5 Sticky Notes, 17 Branches
-\
-**Variations** With Sticky Notes, Without Sticky Notes
-\
-**AI Models** Claude 3.7 Sonnet/Artifacts ([w. Notes](https://claude.ai/share/609877e3-c941-4e7c-97dd-4b984922ce61), [wo. Notes](https://claude.ai/share/a6c540ea-4bd7-4a9c-ac27-e62694c86fb1)), Gemini 2.0 Flash/Chat [w.o. Notes](https://g.co/gemini/share/0268584361bc)
-\
-**Notes**: Great Description of the scene, with or without the hints on the Sticky Notes. Claude's output is much better than Gemini's, but both are acceptable.
-\
-**Evaluation Grade for AI** `B`
+🌀 `**Description**` Visualizing a point orbiting around a 3d Surface  
+🔰 `**Level**` Easy  
+🧩 `**Elements**` 26 Nodes, 5 Sticky Notes, 17 Branches  
+🔄 `**Variations**` With Sticky Notes, Without Sticky Notes  
+🤖 `**Chat Results**` Claude 3.7 Sonnet/Artifacts ([w. Notes](https://claude.ai/share/609877e3-c941-4e7c-97dd-4b984922ce61), [wo. Notes](https://claude.ai/share/a6c540ea-4bd7-4a9c-ac27-e62694c86fb1)), Gemini 2.0 Flash/Chat [w.o. Notes](https://g.co/gemini/share/0268584361bc)  
+📝 `**Analysis**` Great Description of the scene, with or without the hints on the Sticky Notes. Claude's output is much better than Gemini's, but both are acceptable.  
+📊 `**Evaluation Grade for AI**` &nbsp; &nbsp;B
 
 <table>
   <tr>
@@ -168,5 +162,53 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 
 
 ![Claude](images/1_res1.JPG)
+
+</details>
+
+### 2. [The 8-Puzzle](https://tokeru.com/cgwiki/HoudiniVex3.html#sliding_puzzle) on CGWiki
+
+🌀 `Description` Animate the shuffling of an 8-Puzzle  
+🔰 `Level` Medium  
+🧩 `Elements` 10 Nodes, 1 Branch  
+🔄 `Variations` None  
+🤖 `Chat Results` [Claude 3.7 Sonnet](https://claude.ai/share/4f87bac2-b60c-4636-bc0a-f689e7831d81) -  [ChatGPT o3-mini-high](https://chatgpt.com/share/67be57ec-98dc-800b-86bc-71f0eb4ef708) - [Grok 3.0](https://grok.com/share/bGVnYWN5_84233782-b228-4cbe-aef9-1cfaae9661b5)  
+📝 `Analysis` None of the models got the animation logic right, until I gave them a couple of hints.
+- `o3-Mini` got the animation and the name correctly.
+- `Claude` got the animation better than o3-mini, but failed to name the game until he got a third hint.
+- `Grok 3` needed more hints, he got the grid points incorrect, but with the right hints, he got the animation and the game name (It took a few minutes to think on each step).  
+  
+📊 `Evaluation Grade for AI` &nbsp; &nbsp;B
+
+<table>
+  <tr>
+    <td><img src="images/8puzzle.gif" alt="img" width="300"/></td>
+    <td><img src="images/8puzzle_net.png" alt="network" width="600"/></td>
+  </tr>
+</table>
+
+<details>
+<summary>Click to Expand Details</summary>
+<br>
+
+**Prompt Used**
+> You are a SideFx Houdini Expert and Helpful assistant, looking at pseudo-code representation of a Houdini Network. Visualize the Node Network by reflecting on the branch connections, loops, vex wrangles, and node definition. Can you explain the purpose of this Network and its key components in Full Details? Can you break it down as smaller logical functions, with inputs/outputs/purpose for each. Think of the (animated) visual output of each function and describe it. Name the game!
+
+**Second Prompt**
+> ok i need to give you a couple of hints. the assemble1 node will convert the grid into 9 packed squares, you can check what assemble node does to achieve that. the second hint, the blast node deletes one of the squares (0) which is the one colored red. its a square not a point, since its a packed primitive. can you re-imagine again using tis info?
+
+#### o3-mini High, guessing the game 
+![o3-mini-high](images/8puzzle_o3mini-high-res2.png)
+
+#### o3-mini High, Explaining the solver
+![o3](images/8puzzle_o3mini_res1.png)
+
+#### Claude explains the game, but doesn't get the name
+![claude](images/8puzzle_claude_res1.png)
+
+#### Claude figures the name, after a desperate hint
+![claude2](images/8puzzle_claude_res2.png)
+
+#### Grok 3, Explaining the game
+![grok3](images/8puzzle_res2_grok.png)
 
 </details>
