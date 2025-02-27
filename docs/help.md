@@ -212,3 +212,52 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 ![grok3](images/8puzzle_res2_grok.png)
 
 </details>
+
+### 3. [Procedural Burger](https://www.youtube.com/watch?v=cevKyItRvTg) on Simple and Procedural Channel
+
+🌀 `Description` Build the Procedural components of a delicious burger and simulate them falling down [download](https://simpleandprocedural.gumroad.com/l/hfs)  
+🔰 `Level` Hard  
+🧩 `Elements` 88 Nodes, 44 Branches, 9 Network Boxes  
+🔄 `Tweaks` Rewired for better chat experience, removed all text indicating burger ingredients  
+🤖 `Chat Results` [Claude 3.7 Sonnet](https://claude.ai/share/253544b8-ee30-4c0e-927e-8554bd448c0b) -  [ChatGPT o3-mini-high](https://chatgpt.com/share/67be3742-b604-800b-bc94-6d81457d936b) - [Grok 3.0](https://grok.com/share/bGVnYWN5_b7f8cd42-bb9e-4ccd-865c-7c766ade72f7)  
+📝 `Analysis` All Models were good at analyzing the shapes, but only Claude could guess it's a burger, o3-mini-High and Grok guessed few of the burger components correctly.
+- `o3-Mini-High` got the animation and the name correctly.
+- `Claude 3.7 Sonnet` Guessed it correctly with a small hint that it is looking at an organic object.
+- `Grok 3` needed more hints, he got the grid points incorrect, but with the right hints, he got the animation and the game name (It took a few minutes to think on each step).  
+  
+📊 `Evaluation Grade for AI` &nbsp; &nbsp;B
+
+<table>
+  <tr>
+    <td><img src="images/burger1.gif" alt="img" width="300"/></td>
+    <td><img src="images/burger_net.png" alt="network" width="600"/></td>
+  </tr>
+</table>
+
+<details>
+<summary>Click to Expand Details</summary>
+<br>
+
+![burger components](images/burger_elements.png)
+
+**Prompt Used**
+> You are a SideFx Houdini Expert and Helpful assistant, looking at pseudo-code representation of a Houdini Network. Visualize the Node Network by reflecting on the branch connections, loops, vex wrangles, and node definition. Can you explain the purpose of this Network and its key components in Full Details? also, i need you to imagine the different shapes in each OUT node, that are merged together in a OUT_SECRET node at the end
+
+**Second Prompt**
+> i believe you can guess it if you think harder,  think about objects 1 to 6, their shapes, their colors, their relative sizes, their possible relative positions, and you can guess this organic item correctly and its individual elements too
+
+#### Claude was the best at guessing the burger and 6 out of 7 elements correctly!
+![claude](images/burger_claude.png)
+
+#### o3-mini High, guessing 6 out of 7 elements correctly 
+![o3-mini-high](images/burger_o3mini.png)
+
+
+#### Grok 3, guessed a jellyfish, then a pomegranate with the second prompt.
+![grok3](images/burger_grok.png)
+
+#### Grok 3, After I told him it's a burger, it guessed only 3 components correctly out of 7
+![grok3](images/burger_grok2.png)
+
+
+</details>
