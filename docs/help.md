@@ -64,6 +64,31 @@ While it is a `proof of concept`, Houdini 2 Chat has the following features toda
   
 <br>
 
+# Use Cases
+
+- Explain complex Houdini scenes
+- Accelerate learning of Houdini
+- Get help with coding in VEX, Python, or HScript
+- Documentation of Houdini Networks
+- Get suggestions to fix problems in Houdini scenes
+- Find better workflows from thousands of Houdini Nodes and Parameters you may not know.
+ 
+# How to Install
+- Download the latest [HDA](https://github.com/rendermagix/houdini2chat/releases) from the Github [Repo]()
+- To install globally, add it in Houdini otls Folder ([Where?](https://www.sidefx.com/docs/houdini/assets/install.html)).
+
+# How to Use
+- Open any Houdini Scene, browse to your network
+- Drop a Houdini 2 Chat Node
+- Hit Export 2 Chat Button.
+- Paste the output File(s) in your LLM Chat or link the output folder to your AI Code Assistant for seamless updates.
+- Use any of the prompts provided in the output file(s) to get started
+
+> [!NOTE]
+> To install the Asset in this Scene only, follow instructions [here](https://www.sidefx.com/docs/houdini/assets/install.html)
+
+# What's Next
+
 # Does it really work?
 
 ## Evaluation Criteria
@@ -80,11 +105,14 @@ Evaluation criteria is based on LLM/AI Tool ability to recognize the following:
     - User Defined, defaults
 - Understanding the Scene Logic:
   - Nodes meaning and purpose
+  - Partitioning the Network into meaningful parts
   - Network Logic and Purpose
 - Visualization:
   - Visualizing the Output
   - Visualizing Animation
   - Visualizing Geometry
+- Explain the Scene.
+- Suggest Fixes and solutions to Requests.
 - Working seamlessly across LLMs/AI Tools
   - Try Multiple LLMs with same prompts
   - Try Multiple AI Tools with same prompts
@@ -106,18 +134,39 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 
 ## Evaluation
 
-### 1. xyzdist Demo
+### 1. [xyzdist Demo](https://tokeru.com/cgwiki/HoudiniVex3.html#vex-section-3) on CGWiki
+
+ **Description**: Visualizing a point orbiting around a 3d Surface
+\
+**Level** Easy
+\
+ **Elements** 26 Nodes, 5 Sticky Notes, 17 Branches
+\
+**Variations** With Sticky Notes, Without Sticky Notes
+\
+**AI Models** Claude 3.7 Sonnet/Artifacts ([w. Notes](https://claude.ai/share/609877e3-c941-4e7c-97dd-4b984922ce61), [wo. Notes](https://claude.ai/share/a6c540ea-4bd7-4a9c-ac27-e62694c86fb1)), Gemini 2.0 Flash/Chat [w.o. Notes](https://g.co/gemini/share/0268584361bc)
+\
+**Notes**: Great Description of the scene, with or without the hints on the Sticky Notes. Claude's output is much better than Gemini's, but both are acceptable.
+\
+**Evaluation Grade for AI** `B`
 
 <table>
   <tr>
     <td><img src="images/xyzdist.gif" alt="img" width="400"/></td>
-    <td><img src="images/xyzdist_net.JPG" alt="network" width="400"/></td>
+    <td><img src="images/xyzdist_net.JPG" alt="network" width="500"/></td>
   </tr>
 </table>
 
-This is the simplest demo that demonstrates a point orbiting around a 3d Surface.
+<details>
+<summary>Click to Expand Details</summary>
+
+#### Extract from CGWiki
+
 > xyzdist finds the distance, primnum, uv of the closest prim, a point is made at that location, its colour is set from the closest prim, a red line is drawn from the orbiting point to the new point, and finally a wireframe sphere is generated on the new point, its colour also matches the prim its currently on, and its radius is set from the distance returned from xyzdist, so it alwasy just touches the orbiting point.
 
-Extract from Claude Analysis:
+#### Extract from Claude Analysis
+
 
 ![Claude](images/1_res1.JPG)
+
+</details>
