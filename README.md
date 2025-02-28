@@ -4,30 +4,17 @@ Empowering SideFX Houdini Artists with fast growing AI technologies to create be
 
 # HOUDINI 2 CHAT
 
-Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that transforms all or parts of a Houdini scene into a format that is efficient for use with AI chat and AI Code assistants.
+Imagine Houdini Artists have a tool that enables them to instantly chat with any AI program about their Complex Houdini Scenes without describing them, and for free.
 
-**Current Status**
+Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that brings Houdini scenes to any AI chat and any AI Code assistants.
 
-- The project is in **`early development stage (Proof of concept)`**.
-- It is experimental and missing many features.
+**Watch the video to see it in action**  (being uploaded)
 
-# Table of Contents
-<!-- TOC depthFrom:1 depthTo:2 -->
-- [MISSION](#mission)
-- [HOUDINI 2 CHAT](#houdini-2-chat)
-- [Table of Contents](#table-of-contents)
-- [Use Cases](#use-cases)
-  - [How it works](#how-it-works)
-  - [Compatible AI Tools](#compatible-ai-tools)
-- [Compatible Houdini Versions](#compatible-houdini-versions)
-- [Features List](#features-list)
-  - [In the development pipeline](#in-the-development-pipeline)
-- [Releases](#releases)
-- [Next Steps](#next-steps)
-- [Big Future Ideas](#big-future-ideas)
-- [FAQ](#faq)
+[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
 
-<!-- /TOC -->
+>[!WARNING]
+> The project is in **early development stage `(Proof of concept)`**. It is experimental and missing some features.
+
 # Use Cases
 
 - Explain complex Houdini scenes
@@ -36,16 +23,22 @@ Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that transfo
 - Get suggestions to fix problems in Houdini scenes
 - Find better workflows from thousands of Houdini Nodes and Parameters you may not know.
 
-## How it works
-- Download the HDA and Install it in Houdini.
-- Drop the HDA inside any object node in Houdini.
-- Configure if needed and Hit the "Export" button.
+## How to Install
+- Download the latest [release](https://github.com/rendermagix/houdini2chat/releases) from the Github [Repo]()
+- To install globally, add it in Houdini otls Folder ([Where?](https://www.sidefx.com/docs/houdini/assets/install.html)).
+
+## How to Use
+- Open any Houdini Scene, browse to your network
+- Drop a Houdini 2 Chat Node
+- Hit Export 2 Chat Button.
+
 
 Now you can chat with the generated file(s) using any AI chat or AI code assistant.
 
 ## Compatible AI Tools
 ### Tested with
-- ChatGPT Plus in canvas mode (should work with the free version too)
+- ChatGPT Plus (regular and Canvas mode) (should work with the free version too)
+- Claude Sonnet 3.7 (regular and Artifacts mode)
 - Github Copilot (Pro) Chat in VS Code (should work with the free version too)
 
 ### Should also work with (Not Tested)
@@ -83,7 +76,7 @@ Now you can chat with the generated file(s) using any AI chat or AI code assista
 
 # Releases
 
-0.0.1
+0.1.0 &nbsp; [First Release](https://github.com/rendermagix/houdini2chat/releases/tag/v0.1.0)
 
 # Next Steps
 - Gather initial feedback on the Houdini 2 Chat concept.

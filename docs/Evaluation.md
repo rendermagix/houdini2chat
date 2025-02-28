@@ -56,7 +56,6 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 🔄 `**Variations**` With Sticky Notes, Without Sticky Notes  
 🤖 `**Chat Results**` Claude 3.7 Sonnet/Artifacts ([w. Notes](https://claude.ai/share/609877e3-c941-4e7c-97dd-4b984922ce61), [wo. Notes](https://claude.ai/share/a6c540ea-4bd7-4a9c-ac27-e62694c86fb1)), Gemini 2.0 Flash/Chat [w.o. Notes](https://g.co/gemini/share/0268584361bc)  
 📝 `**Analysis**` Great Description of the scene, with or without the hints on the Sticky Notes. Claude's output is much better than Gemini's, but both are acceptable.  
-📊 `**Evaluation Grade for AI**` &nbsp; &nbsp;B
 
 <table>
   <tr>
@@ -91,7 +90,6 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 - `Claude` got the animation better than o3-mini, but failed to name the game until he got a third hint.
 - `Grok 3` needed more hints, he got the grid points incorrect, but with the right hints, he got the animation and the game name (It took a few minutes to think on each step).  
   
-📊 `Evaluation Grade for AI` &nbsp; &nbsp;B
 
 <table>
   <tr>
@@ -138,8 +136,7 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 - `o3-Mini-High`  guessed 6 out of 7 elements correctly.
 - `Claude 3.7 Sonnet` Guessed it correctly with a small hint that it is looking at an organic object.
 - `Grok 3` After I told him it's a burger, it guessed only 3 components correctly out of 7  
-  
-📊 `Evaluation Grade for AI` &nbsp; &nbsp;B
+
 
 <table>
   <tr>
