@@ -135,9 +135,9 @@ Full credit to the following Channels/Authors for providing these scenes to the 
 🔄 `Tweaks` Rewired for better chat experience, removed all text indicating burger ingredients  
 🤖 `Chat Results` [Claude 3.7 Sonnet](https://claude.ai/share/253544b8-ee30-4c0e-927e-8554bd448c0b) -  [ChatGPT o3-mini-high](https://chatgpt.com/share/67be3742-b604-800b-bc94-6d81457d936b) - [Grok 3.0](https://grok.com/share/bGVnYWN5_b7f8cd42-bb9e-4ccd-865c-7c766ade72f7)  
 📝 `Analysis` All Models were good at analyzing the shapes, but only Claude could guess it's a burger, o3-mini-High and Grok guessed few of the burger components correctly.
-- `o3-Mini-High` got the animation and the name correctly.
+- `o3-Mini-High`  guessed 6 out of 7 elements correctly.
 - `Claude 3.7 Sonnet` Guessed it correctly with a small hint that it is looking at an organic object.
-- `Grok 3` needed more hints, he got the grid points incorrect, but with the right hints, he got the animation and the game name (It took a few minutes to think on each step).  
+- `Grok 3` After I told him it's a burger, it guessed only 3 components correctly out of 7  
   
 📊 `Evaluation Grade for AI` &nbsp; &nbsp;B
 
