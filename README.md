@@ -8,9 +8,9 @@ Imagine Houdini Artists have a tool that enables them to instantly chat with any
 
 Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that brings Houdini scenes to any AI chat and any AI Code assistants.
 
-**Watch the video to see it in action**  (being uploaded)
+**Watch the video to see it in action**
 
-[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+[![Video Title](https://img.youtube.com/vi/zzEDeaTQBZI/0.jpg)](https://www.youtube.com/watch?v=zzEDeaTQBZI)
 
 >[!WARNING]
 > The project is in **early development stage `(Proof of concept)`**. It is experimental and missing some features.
