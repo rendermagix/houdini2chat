@@ -25,3 +25,4 @@ poetry.lock
 *.tmp
 
 tools/lib/
+local/
