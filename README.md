@@ -9,11 +9,10 @@ Imagine Houdini Artists have a tool that enables them to instantly chat with any
 Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that brings Houdini scenes to any AI chat and any AI Code assistants.
 
 **Watch the video to see it in action**
-
-<div align="center" style="max-width: 300px; margin: 0 auto;">
-  
-[![Video Title](docs/images/youtube_cover_link.png)](https://www.youtube.com/watch?v=zzEDeaTQBZI)
-
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=zzEDeaTQBZI">
+    <img src="docs/images/youtube_cover_link.png" style="max-width:300px; width:100%;" alt="Video Title"/>
+  </a>
 </div>
 
 >[!WARNING]
