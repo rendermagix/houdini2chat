@@ -11,7 +11,7 @@ Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that brings 
 **Watch the video to see it in action**
 <div align="center">
   <a href="https://www.youtube.com/watch?v=zzEDeaTQBZI">
-    <img src="docs/images/youtube_cover_link.png" style="max-width:300px; width:100%;" alt="Video Title"/>
+    <img src="docs/images/youtube_cover_link.png" style="width:500px;" alt="Video Title"/>
   </a>
 </div>
 
