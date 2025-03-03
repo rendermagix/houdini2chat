@@ -26,6 +26,26 @@ Our first project, Houdini 2 Chat is an HDA (Houdini Digital Asset) that brings 
 - Get suggestions to fix problems in Houdini scenes
 - Find better workflows from thousands of Houdini Nodes and Parameters you may not know.
 
+# Demos
+
+**Rubik's Cube - On YouTube**
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=fdHFIe1YfUQ">
+    <img src="https://img.youtube.com/vi/fdHFIe1YfUQ/0.jpg" style="width:300px;" alt="Video Title"/>
+  </a>
+</div>
+
+**It's a Hamburger! - On YouTube**
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=som2GPRiB5A">
+    <img src="https://img.youtube.com/vi/som2GPRiB5A/0.jpg" style="width:300px;" alt="Video Title"/>
+  </a>
+</div>
+
+<br>
+
+👉 **Check out The full evaluation** [here](docs/Evaluation.md)
+
 ## How to Install
 - Download the latest [release](https://github.com/rendermagix/houdini2chat/releases) from the Github [Repo]()
 - To install globally, add it in Houdini otls Folder ([Where?](https://www.sidefx.com/docs/houdini/assets/install.html)).
@@ -91,7 +111,13 @@ Now you can chat with the generated file(s) using any AI chat or AI code assista
 - Create a Houdini tuned LLM Model.
 - Make a better integration inside SideFX Houdini.
 - Implement innovative ways to update Houdini scenes using Generative AI.
-  
+
+# Social Media
+- X: [@rendermagix](https://twitter.com/rendermagix)
+- Instagram: [@rendermagix](https://www.instagram.com/rendermagix/)
+- Youtube: [@rendermagix](https://www.youtube.com/@rendermagix)
+- LinkedIn: [Michel Habib](https://www.linkedin.com/in/michelhabib/)
+
 # FAQ
 <details>
 <summary>Click to Expand Questions/Answers</summary>
